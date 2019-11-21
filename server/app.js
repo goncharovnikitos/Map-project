@@ -34,3 +34,4 @@ app.delete('/notes/:id', (req, res) => {
 const server = app.listen(serverPort, function() {
     console.log(`Server is up and running on port ${serverPort}`);
 });
+

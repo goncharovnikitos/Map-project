@@ -21,11 +21,24 @@ export function createNote(data) {
         color: data.color,
         createdAt: new Date()
     });
-
+/*
+export function createUser(data) {
+    const note = new Users({
+        login: data.login,
+        password: data.password,
+        lastName: data.lastName,
+        firstName: data.firstName,
+        middleName: data.middleName,
+        email: data.email,
+        isAdmin: data.isAdmin,
+        createdAt: new Date()
+    });*/ 
     return note.save();
 }
 
 export function deleteNote(id) {
     return Note.findById(id).remove();
 }
+
+//createNote({title:"1as", text:"szm",color: "#FF8A80"});
 
