@@ -23,7 +23,7 @@
 body {
   background-color: #1B1D2A;
 }
-.body {
+.body3 {
   display: flex;
   width: 100%;
 }
@@ -57,4 +57,20 @@ body {
 }
 .card li {
   list-style-type: none;
+}
+
+.Menu ul {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 5vmin
+}
+.Menu a {
+  text-decoration: none;
+  color: white;
+}
+.Menu a:hover {
+  fill: red;
 }
