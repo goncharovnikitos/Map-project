@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { apiPrefix } from '../../etc/config.json';
+import { apiPrefix } from '../../server/config.json';
 
 export default {
     listNotes() {

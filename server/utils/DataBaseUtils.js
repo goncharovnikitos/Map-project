@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import config from '../../etc/config.json';
+import config from '../config.json';
 
 import '../models/Note';
 
