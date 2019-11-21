@@ -19,17 +19,17 @@ app.use( bodyParser.json() );
 app.use(cors({ origin: '*' }));
 
 // RESTful api handlers
-app.get('/notes', (req, res) => {
-    db.listNotes().then(data => res.send(data));
+app.get('/users', (req, res) => {
+    db.listUsers().then(data => res.send(data));
 });
 
-app.post('/notes', (req, res) => {
-    db.createNote(req.body).then(data => res.send(data));
+app.post('/users', (req, res) => {
+    db.createUser(req.body).then(data => res.send(data));
 });
 
-app.delete('/notes/:id', (req, res) => {
+/*app.delete('/User/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));
-});
+});*/
 
 const server = app.listen(serverPort, function() {
     console.log(`Server is up and running on port ${serverPort}`);

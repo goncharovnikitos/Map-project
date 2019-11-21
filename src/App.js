@@ -1,54 +1,43 @@
 import React from 'react';
 import './App.css';
-import './View3'
-import View3 from "./View3";
-import Menu from "./Menu";
-import axios from 'axios';
+import UsersComp from "./UsersComp";
+import MapComp from './MapComp'
+import PeopleCard from "./PeopleCard";
 
+let dict = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: null,
+    5: null,
+};
 
 class App extends React.Component {
     state = {
-        users: []
+        placeId: null
     };
 
     render() {
-        if (!this.state.users.length){
-            this.getAll();
-        }
-        console.log('App props', this.props);
-        let userItems = [];
-        let users = this.state.users;
-        for (let i = 0; i < users.length; i++) {
-            userItems.push(<span eventKey="{i}">{users[i].text}</span>)
-        }
+        console.log('App props', this.props)
         return (
             <div className="App">
                 <header className="App-header">
                     <p>
-                        Office map
-                        {userItems}
+                        Здесь будет какая-то шапка
                     </p>
                 </header>
-
-                <Menu/>
-                <View3/>
+                <div className="body">
+                    <MapComp onPlace={(e) => {
+                        this.setState({placeId: e.target.dataset.placeid});
+                        console.log(e.target.dataset.placeid);
+                    }
+                    }/>
+                    {/*<UsersComp selectedPlace={dict[this.state.placeId]}/>*/}
+                    <PeopleCard placeId={this.state.placeId}/>
                 </div>
+            </div>
 
         );
-    }
-
-    getAll() {
-        axios.get('http://localhost:8080/notes')
-            // .then(resp => resp.json())
-            .then( (response) => {
-                console.info(response);
-                this.setState({
-                    users: response.data
-                });
-            })
-            .catch( (error) => {
-                console.error(error);
-            });
     }
 }
 

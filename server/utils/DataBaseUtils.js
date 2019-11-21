@@ -2,42 +2,37 @@ import mongoose from "mongoose";
 
 import config from '../config.json';
 
-import '../models/Note';
+import '../models/User';
 
-const Note = mongoose.model('Note');
+const User = mongoose.model('User');
 
 export function setUpConnection() {
     mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
 }
 
-export function listNotes(id) {
-    return Note.find();
+export function listUsers() {
+    return User.find();
 }
 
-export function createNote(data) {
-    const note = new Note({
-        title: data.title,
-        text: data.text,
-        color: data.color,
-        createdAt: new Date()
-    });
-/*
+
+
 export function createUser(data) {
-    const note = new Users({
+    const user = new User({
         login: data.login,
         password: data.password,
         lastName: data.lastName,
         firstName: data.firstName,
         middleName: data.middleName,
         email: data.email,
+        photo: data.photo,
         isAdmin: data.isAdmin,
         createdAt: new Date()
-    });*/ 
-    return note.save();
+    });
+    return user.save();
 }
 
 export function deleteNote(id) {
-    return Note.findById(id).remove();
+    return User.findById(id).remove();
 }
 
 //createNote({title:"1as", text:"szm",color: "#FF8A80"});

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const NoteSchema = new Schema({
+const UserSchema = new Schema({
     login     : { type: String, required: true },
     password     : { type: String, required: true  },
     lastName     : { type: String },
@@ -14,4 +14,4 @@ const NoteSchema = new Schema({
     createdAt : { type: Date }
     });
 
-mongoose.model('Note', NoteSchema);
+mongoose.model('User', UserSchema);
