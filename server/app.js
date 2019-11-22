@@ -13,7 +13,8 @@ const app = express();
 db.setUpConnection();
 
 // Using bodyParser middleware
-app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Allow requests from any origin
 app.use(cors({ origin: '*' }));
@@ -23,8 +24,10 @@ app.get('/users', (req, res) => {
     db.listUsers().then(data => res.send(data));
 });
 
-app.post('/users', (req, res) => {
-    db.createUser(req.body).then(data => res.send(data));
+app.post('/users/', (req, res) => {
+    console.log(req.body);
+    res.redirect('http://localhost:3000/');
+    // db.createUser(req.body).then(data => res.send(data));
 });
 
 /*app.delete('/User/:id', (req, res) => {

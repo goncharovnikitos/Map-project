@@ -4,3 +4,4 @@ server/config.json
 script
 yarn-error.log
 yarn.lock
+.idea/
