@@ -1,9 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import formidable from 'express-formidable';
-import multiparty from 'multiparty';
-import util from 'util';
+import session from 'express-session';
 
 import { serverPort } from './config.json';
 
@@ -16,12 +14,21 @@ const app = express();
 db.setUpConnection();
 
 // Using bodyParser middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-// app.use(bodyParser());
-// app.use(formidable());
-// app.use(multiparty);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser());
+
+var sess = {
+    secret: 'keyboard cat',
+    cookie: {}
+};
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // trust first proxy
+    sess.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sess));
 
 // Allow requests from any origin
 app.use(cors({ origin: '*' }));
@@ -38,26 +45,16 @@ app.get('/users', (req, res) => {
     db.listUsers().then(data => res.send(data));
 });
 
-app.post('/newuser/', (req, res) => {
-    // console.log(req.fields);
-    var form = new multiparty.Form();
+app.get('/get-login', (req, res) => {
+   res.send(session.user_id || 'guest');
+});
 
-    form.parse(req, function(err, fields, files) {
-        console.log(err);
-        console.log(fields);
-        console.log(files);
-        // res.writeHead(200, {'content-type': 'text/plain'});
-        // res.write('received upload:\n\n');
-        // res.end(util.inspect({fields: fields, files: files}));
+app.post('/new-user/', (req, res) => {
+    db.createUser(req.body).then(function(data) {
+        let user_id = (data && data._id) ? data._id : null;
+        session.user_id = user_id;
+        res.send(user_id ? 'ok' : 'error');
     });
-    // console.log(req.body);
-    // console.log(req.body);
-    // console.log(req.query);
-    // console.log(req.body);
-    res.send('test1'); return;
-    // db.createUser(req.body).then(data => res.send(data));
-    // res.redirect('http://localhost:3000/');//переброс пользователя обратно
-    // db.createUser(req.body).then(data => res.send(data));
 });
 
 /*app.post('/findLocation', (req, res)) => { 

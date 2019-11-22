@@ -1,16 +1,16 @@
 {
-  "name": "NotesApp",
-  "version": "0.0.1",
-  "description": "Notes application",
+  "name": "Map-project",
+  "version": "0.0.2",
+  "description": "Map project application",
   "scripts": {
     "server": "babel-node server/app.js",
     "frontend": "react-scripts start",
     "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8090 --host 0.0.0.0"
   },
   "author": {
-    "name": "Kateryna Porshnieva",
-    "email": "k.porshnieva@gmail.com",
-    "url": "https://github.com/krambertech"
+    "name": "Nikita Goncharov",
+    "email": "nikita@gmail.com",
+    "url": "https://github.com/nikita"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -19,21 +19,20 @@
     "cors": "*",
     "events": "^1.1.0",
     "express": "*",
-    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.0",
     "flux": "^2.1.1",
     "html-react-parser": "^0.10.0",
     "jquery": "^3.4.1",
     "keymirror": "^0.1.1",
     "less": "^2.6.0",
     "mongoose": "*",
-    "multiparty": "^4.2.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-global-configuration": "^1.4.0",
     "react-masonry-component": "^4.0.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.2.0",
-    "util": "^0.12.1"
+    "react-scripts": "^3.2.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "*",

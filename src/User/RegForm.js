@@ -1,60 +1,21 @@
 import React from 'react';
-import axios from "axios";
-
-
+import jQuery from 'jquery';
+import config from './../config';
+const apiPrefix = config.apiPrefix;
 
 export default class RegForm extends React.Component {
     state = {
         placeId: null,
-        users: [1,23],
+        users: [],
         res: null
     };
     sendForm = function(e){
-        /* console.log(event);
-        console.log(event.target);
-        console.log(new FormData(event.target));
-        // console.log(this.state);
-        // alert('A name was submitted: ' + this.state.value);
-        event.preventDefault(); */
+        let _this = this;
+        jQuery.post(apiPrefix + '/new-user', jQuery('form').serializeArray(), function(res){
+           console.log(res);
+        });
 
         e.preventDefault();
-        let _this = this;
-
-        /* fetch(new Request('http://localhost:8080/newuser', {
-            method: 'POST',
-            mode: "no-cors",
-            redirect: 'follow',
-            headers: new Headers({
-                // 'Content-Type': 'application/json'
-                'Content-Type': 'multipart/form-data'
-                // 'Content-Type': 'application/x-www-form-urlencoded'
-            })
-            // Math.random().toString(36).substring(2, 15);
-        }), {
-            // credentials: 'include',
-            body: new FormData(e.target)
-            // body: JSON.stringify({login: 'heloo', password:'dfaf'})
-        }) */
-
-        fetch('http://localhost:8080/newuser', {
-            headers: {
-                // 'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL'
-            },
-            // method: "POST",
-            // body: {a: 1, b: 2},
-            mode: "no-cors",
-            method: 'POST',
-            // type: 'JSON',
-            body: new FormData(e.target)
-            // body: JSON.stringify({login: 'heloo', password:'dfaf'}) //new FormData(e.target).json()
-        })
-            .then(response => response.text())
-            .then(json_data => console.log(json_data));
-
-        // let result = await response.json();
-        //
-        // alert(result.message);
     };
     render(){
         return (

@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import './components/View3'
 import MainPage from "./components/MainPage";
 import RegPage from "./components/RegPage";
 import AuthPage from "./components/AuthPage";
 import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import config from './config';
+const apiPrefix = config.apiPrefix;
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
