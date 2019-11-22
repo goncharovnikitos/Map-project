@@ -27,7 +27,7 @@ app.get('/users', (req, res) => {
 
 
 
-app.post('/users/', (req, res) => {
+app.post('/newuser/', (req, res) => {
     console.log(req.body);
     db.createUser(req.body).then(data => res.send(data));
     res.redirect('http://localhost:3000/');//переброс пользователя обратно
