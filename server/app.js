@@ -36,7 +36,7 @@ app.post('/newuser/', (req, res) => {
 
 /*app.post('/findLocation', (req, res)) => { 
     db.find(req._id).then(data => res.send())
-}*/
+} не понятно */
 
 /*app.delete('/User/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));
