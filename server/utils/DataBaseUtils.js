@@ -21,6 +21,9 @@ export function findUserID(id) {
 export function findUserByName(name){
     return User.find({lastName: name});
 }
+export function loginUser(login, password){
+    return User.findOne({$and: [{login: login}, {password: password}]});
+}
 
 export function validateUser(data) {
     const user = new User({

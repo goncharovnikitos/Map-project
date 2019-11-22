@@ -27,7 +27,6 @@ export default class RegForm extends React.Component {
             <div className="content1">
                 <link rel="stylesheet" href="style.css"/>
                 <div className="reg_form central_form">
-                    {/*<form action="http://localhost:8080/newuser" method="post">*/}
                     <form onSubmit={this.sendForm} enctype="multipart/form-data" method="post">
                         <div className="title">Введите данные для регистрации</div>
                         <div className="user"><label for="reg_user">Логин: </label><input id="reg_user" type="text"
