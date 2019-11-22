@@ -8,6 +8,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 class App extends React.Component {
     state = {
@@ -17,10 +18,10 @@ class App extends React.Component {
 
     render() {
         if (!this.state.users.length){
-            this.getAll();
+            // this.getAll();
         }
         //this.state.url=location.query;
-        console.log('App props', this.props);
+        // console.log('App props', this.props);
         // console.log('App props', this.props);
         let userItems = [];
         let users = this.state.users;
