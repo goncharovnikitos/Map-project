@@ -12,7 +12,12 @@ export default class RegForm extends React.Component {
     sendForm = function(e){
         let _this = this;
         jQuery.post(apiPrefix + '/new-user', jQuery('form').serializeArray(), function(res){
-           console.log(res);
+           if (res === 'ok'){
+               alert("Вы успешно зарегистрированы");
+               document.write('<script>location.href="/"</script>')
+           } else {
+               alert(res);
+           }
         });
 
         e.preventDefault();

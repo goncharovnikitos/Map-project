@@ -7,23 +7,62 @@ import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import config from './config';
+import jQuery from "jquery";
 const apiPrefix = config.apiPrefix;
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 class App extends React.Component {
-    state = {
-        placeId: null,
-        users: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            initialized:
+                false,
+            placeId: null,
+            users: [],
+            user_id: 'guest',
+        };
+        this.init = () => {
+            let _this = this;
+            jQuery.get(apiPrefix + '/get-login', function(res){
+                _this.setState({
+                    user_id: res
+                });
+                // _this.state.user_id = res; // user._id OR 'guest'
+            });
+            axios.get(apiPrefix + '/get-login')
+            // .then(resp => resp.json())
+                .then( (response) => {//когда ответ получим - можем вызвать функцию
+                    // console.info(response);
+                    this.setState({
+                        users: response.data
+                    });
+                })
+                .catch( (error) => {
+                    console.error(error);
+                });
+            // if (!this.state.users.length){
+            // this.getAll();
+            // }
+        };
+        this.getAll = () => {
+            axios.get(apiPrefix + '/users')
+            // .then(resp => resp.json())
+                .then( (response) => {//когда ответ получим - можем вызвать функцию
+                    // console.info(response);
+                    this.setState({
+                        users: response.data
+                    });
+                })
+                .catch( (error) => {
+                    console.error(error);
+                });
+        };
+        this.init();
+    }
+
 
     render() {
-        if (!this.state.users.length){
-            // this.getAll();
-        }
-        //this.state.url=location.query;
-        // console.log('App props', this.props);
-        // console.log('App props', this.props);
         let userItems = [];
         let users = this.state.users;
         for (let i = 0; i < users.length; i++) {
@@ -34,8 +73,8 @@ class App extends React.Component {
             <div className="App">
                 <header className="App-header">
                     <p>
-                        Office map
-                        {userItems}
+                        Office map. Привет {this.state.user_id}
+                        {/*{userItems}*/}
                     </p>
                 </header>
                 <Router>
@@ -53,19 +92,7 @@ class App extends React.Component {
         );
     }
 
-    getAll() {
-        axios.get('http://localhost:8080/users')
-            // .then(resp => resp.json())
-            .then( (response) => {//когда ответ получим - можем вызвать функцию
-                // console.info(response);
-                this.setState({
-                    users: response.data
-                });
-            })
-            .catch( (error) => {
-                console.error(error);
-            });
-    }
+
 }
 
 export default App;

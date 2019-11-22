@@ -50,6 +50,11 @@ app.get('/get-login', (req, res) => {
 });
 
 app.post('/new-user/', (req, res) => {
+    let validate = db.validateUser(req.body);
+    if (validate !== true){
+        res.send(validate);
+        return;
+    }
     db.createUser(req.body).then(function(data) {
         let user_id = (data && data._id) ? data._id : null;
         session.user_id = user_id;
