@@ -62,6 +62,21 @@ app.post('/new-user/', (req, res) => {
     });
 });
 
+app.get('/logout', (req, res) => {
+    session.user_id = 'guest';
+    res.send('ok');
+});
+
+app.post('/login', (req, res) => {
+    db.loginUser(req.body.login, req.body.password).then(function(data) {
+        console.log(data);
+        let user_id = (data && data._id) ? data._id : null;
+        session.user_id = user_id;
+        res.send(user_id ? 'ok' : 'Пользователь не найден');
+        // res.send(data);
+    });
+});
+
 /*app.post('/findLocation', (req, res)) => { 
     db.find(req._id).then(data => res.send())
 }*/

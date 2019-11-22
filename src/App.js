@@ -3,6 +3,7 @@ import './App.css';
 import MainPage from "./components/MainPage";
 import RegPage from "./components/RegPage";
 import AuthPage from "./components/AuthPage";
+import LogoutPage from "./components/LogoutPage";
 import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -69,11 +70,17 @@ class App extends React.Component {
       //      userItems.push(<span eventKey="{i}">{users[i].text}</span>)
          //   userItems.push(<UserListItems user="{users[i]}">{users[i].text}</UserListItems>)
         }
+        let loginBtn = '';
+        if (this.state.user_id === 'guest')
+            loginBtn = <a href="/auth">Войти</a>
+        else
+            loginBtn = <span>Привет {this.state.user_id} <a href="/logout">Выйти</a></span>
         return (
             <div className="App">
                 <header className="App-header">
                     <p>
-                        Office map. Привет {this.state.user_id}
+                        Office map.
+                        {loginBtn}
                         {/*{userItems}*/}
                     </p>
                 </header>
@@ -82,6 +89,7 @@ class App extends React.Component {
                         <Route exact path="/" component={MainPage} />
                         <Route exact path="/reg" component={RegPage} />
                         <Route exact path="/auth" component={AuthPage} />
+                        <Route exact path="/logout" component={LogoutPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </Router>
