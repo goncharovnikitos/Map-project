@@ -48,7 +48,7 @@ export function validateUser(data) {
     return true;
 }
 
-export function createUser(data, res) {
+export function createUser(data) {
     const user = new User({
         login: data.login,
         password: data.password,
