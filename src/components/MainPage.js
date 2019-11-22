@@ -1,9 +1,7 @@
 import React from 'react';
-import './App.css';
-import './components/View3'
-import MainPage from "./components/MainPage";
-import RegPage from "./components/RegPage";
-import NotFoundPage from "./components/NotFoundPage";
+import './View3'
+import View3 from "./View3";
+import Menu from "./Menu";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -23,25 +21,12 @@ class App extends React.Component {
         let users = this.state.users;
         for (let i = 0; i < users.length; i++) {
             // userItems.push(<span eventKey="{i}">{users[i].text}</span>)
-         //   userItems.push(<UserListItems user="{users[i]}">{users[i].text}</UserListItems>)
+            //   userItems.push(<UserListItems user="{users[i]}">{users[i].text}</UserListItems>)
         }
         return (
             <div className="App">
-                <header className="App-header">
-                    <p>
-                        Office map
-                        {userItems}
-                    </p>
-                </header>
-                <Router>
-                    <Switch>
-                        <Route exact path="/" component={MainPage} />
-                        <Route exact path="/reg" component={RegPage} />
-                        <Route component={NotFoundPage} />
-                    </Switch>
-                </Router>
-                {/*<Menu/>*/}
-                {/*<View3/>*/}
+                <Menu/>
+                <View3/>
             </div>
 
         );
@@ -49,7 +34,7 @@ class App extends React.Component {
 
     getAll() {
         axios.get('http://localhost:8080/users')
-            // .then(resp => resp.json())
+        // .then(resp => resp.json())
             .then( (response) => {//когда ответ получим - можем вызвать функцию
                 // console.info(response);
                 this.setState({

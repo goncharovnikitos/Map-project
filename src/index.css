@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #fff;
 }
 
 code {
@@ -19,5 +20,5 @@ code {
   display: flex;
   align-items: center;
   align-content: center; 
-  justify-content: center; 
+  justify-content: center;
 }

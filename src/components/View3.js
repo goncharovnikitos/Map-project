@@ -1,7 +1,7 @@
 import React from 'react';
 import MapComp from "./MapComp";
 import PeopleCard from "./PeopleCard";
-import AddUserForm from "./User/Add";
+import AddUserForm from "../User/Add";
 
 export default class View3 extends React.Component {
     state = {
@@ -17,7 +17,7 @@ export default class View3 extends React.Component {
                 }/>
                 {/*<UsersComp selectedPlace={dict[this.state.placeId]}/>*/}
                 <PeopleCard placeId={this.state.placeId}/>
-                <AddUserForm />
+                {/*<AddUserForm />*/}
             </div>
             
         )

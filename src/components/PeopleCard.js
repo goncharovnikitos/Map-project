@@ -1,5 +1,5 @@
 import React from 'react';
-import photo from './photo.jpg'
+import photo from '../photo.jpg'
 
 let users = [
     {
