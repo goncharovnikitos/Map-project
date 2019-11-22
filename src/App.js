@@ -3,11 +3,9 @@ import './App.css';
 import './components/View3'
 import MainPage from "./components/MainPage";
 import RegPage from "./components/RegPage";
+import AuthPage from "./components/AuthPage";
 import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
-import { exists } from 'fs';
-import AuthForm from './User/AuthForm';
-import RegForm from './User/RegForm';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -42,6 +40,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" component={MainPage} />
                         <Route exact path="/reg" component={RegPage} />
+                        <Route exact path="/auth" component={AuthPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </Router>

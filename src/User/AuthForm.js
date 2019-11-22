@@ -15,7 +15,7 @@ export default function AuthForm(props) {
     <div className="content1">
         <link rel="stylesheet" href="style.css"/>
     <div className="login_form central_form"></div>
-        <form action="http://localhost:8080/users" method="post">
+        <form action="http://localhost:8080" method="post">
             <div className="title">Введите данные для авторизации</div>
             <div className="user"><label for="login_user">Логин: </label><input id="login_user" type="text" name="login"/>
             </div>
@@ -23,10 +23,7 @@ export default function AuthForm(props) {
             </div>
             <div className="submit"><input type="submit" value="Авторизоваться"/></div>
         </form>
-        <div class="not_login">
-            Вы не зарегистрированы. Пройдите по
-            <a href="http://localhost:8080/newuser" className="">ссылке</a>
-        </div>
+
     </div>
 );
 }
