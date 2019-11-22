@@ -33,10 +33,7 @@ export default function RegForm(props) {
                 </div>
                 <div className="submit"><input type="submit" value="Зарегистрироваться"/></div>
             </form>
-            <div class="not_login">
-                Вы зарегистрированы? Пройдите по
-                <a href="http://localhost:8080/users" className="">ссылке</a>
-            </div>
+
         </div>
         </div>
 );

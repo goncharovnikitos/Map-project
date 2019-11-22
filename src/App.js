@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import './View3'
-import View3 from "./View3";
-import Menu from "./Menu";
+import './components/View3'
+import MainPage from "./components/MainPage";
+import RegPage from "./components/RegPage";
+import AuthPage from "./components/AuthPage";
+import NotFoundPage from "./components/NotFoundPage";
 import axios from 'axios';
-import { exists } from 'fs';
-import AuthForm from './User/AuthForm';
-import RegForm from './User/RegForm';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 
 class App extends React.Component {
     state = {
         placeId: null,
-        users: [],
-        url: "/"
+        users: []
     };
 
     render() {
@@ -21,6 +21,7 @@ class App extends React.Component {
         }
         //this.state.url=location.query;
         console.log('App props', this.props);
+        // console.log('App props', this.props);
         let userItems = [];
         let users = this.state.users;
         for (let i = 0; i < users.length; i++) {
@@ -33,24 +34,28 @@ class App extends React.Component {
                     <p>
                         Office map
                         {userItems}
-                       {this.state.url}
                     </p>
                 </header>
-
-                <Menu/>
-                <View3/>
-                <RegForm/>
-            
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={MainPage} />
+                        <Route exact path="/reg" component={RegPage} />
+                        <Route exact path="/auth" component={AuthPage} />
+                        <Route component={NotFoundPage} />
+                    </Switch>
+                </Router>
+                {/*<Menu/>*/}
+                {/*<View3/>*/}
             </div>
 
         );
     }
 
     getAll() {
-        axios.get('http://localhost:8080/notes')
+        axios.get('http://localhost:8080/users')
             // .then(resp => resp.json())
             .then( (response) => {//когда ответ получим - можем вызвать функцию
-                console.info(response);
+                // console.info(response);
                 this.setState({
                     users: response.data
                 });
