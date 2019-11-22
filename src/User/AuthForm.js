@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default function AddUserForm(props) {
+export default function AuthForm(props) {
   /*  state = {
         placeId: null,
         users: []
@@ -23,6 +23,10 @@ export default function AddUserForm(props) {
             </div>
             <div className="submit"><input type="submit" value="Авторизоваться"/></div>
         </form>
+        <div class="not_login">
+            Вы не зарегистрированы. Пройдите по
+            <a href="http://localhost:8080/newuser" className="">ссылке</a>
+        </div>
     </div>
-    );
+);
 }

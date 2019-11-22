@@ -2,6 +2,7 @@ import React from 'react';
 import MapComp from "./MapComp";
 import PeopleCard from "./PeopleCard";
 import AddUserForm from "../User/Add";
+import AddUserForm from "./User/AuthForm";
 
 export default class View3 extends React.Component {
     state = {
