@@ -49,6 +49,10 @@ app.get('/get-login', (req, res) => {
    res.send(session.user_id || 'guest');
 });
 
+app.get('/find-user/:id', (req, res) => {
+    db.findUserID(req.params.id).then(data => res.send(data));
+});
+
 app.post('/new-user/', (req, res) => {
     let validate = db.validateUser(req.body);
     if (validate !== true){
