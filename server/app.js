@@ -34,6 +34,10 @@ app.post('/newuser/', (req, res) => {
     // db.createUser(req.body).then(data => res.send(data));
 });
 
+/*app.post('/findLocation', (req, res)) => { 
+    db.find(req._id).then(data => res.send())
+}*/
+
 /*app.delete('/User/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));
 });*/

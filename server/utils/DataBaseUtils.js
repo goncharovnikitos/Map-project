@@ -14,6 +14,13 @@ export function listUsers() {
     return User.find();
 }
 
+export function findUserID(id) {
+    return User.findById(id);
+}
+
+export function findUserByName(name){
+    return User.find({lastName: name});
+}
 
 
 export function createUser(data) {
@@ -31,7 +38,7 @@ export function createUser(data) {
     return user.save();
 }
 
-export function deleteNote(id) {
+export function deleteUser(id) {
     return User.findById(id).remove();
 }
 
