@@ -24,9 +24,13 @@ app.get('/users', (req, res) => {
     db.listUsers().then(data => res.send(data));
 });
 
+
+
+
 app.post('/users/', (req, res) => {
     console.log(req.body);
-    res.redirect('http://localhost:3000/');
+    db.createUser(req.body).then(data => res.send(data));
+    res.redirect('http://localhost:3000/');//переброс пользователя обратно
     // db.createUser(req.body).then(data => res.send(data));
 });
 
