@@ -14,7 +14,7 @@ export function listUsers() {
     return User.find();
 }
 
-export function findUserID(id) {
+export function findUserByID(id) {
     return User.findById(id);
 }
 
@@ -28,6 +28,7 @@ export function loginUser(login, password){
     return User.findOne({$and: [{login: login}, {password: password}]});
 }
 
+// функция для сопоставления данных из POST в поля базы данных
 function formatUser(data) {
     return {
         login: data.login,
@@ -42,6 +43,8 @@ function formatUser(data) {
     };
 }
 
+// производим синхронную валидацию данных пользователя
+// возвращает true, если ошибок нет, иначе возращает массив из текстовых ошибок
 export function validateUser(data) {
     const user = new User(formatUser(data));
     let validator = user.validateSync();
@@ -59,6 +62,9 @@ export function validateUser(data) {
 }
 
 export function createUser(data) {
+    // осуществляем поиск записи по login = data.login, если не находим, то создаем запись.
+    // за создание записи, если она не найдена отвечает { upsert: true }
+    // затем в найденной или созданной записи производим обновление данных на formatUser(data)
     return User.replaceOne({login: data.login}, formatUser(data), { upsert: true });
 }
 
