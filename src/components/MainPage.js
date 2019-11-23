@@ -1,10 +1,7 @@
 import React from 'react';
-import './View3'
 import View3 from "./View3";
 import Menu from "./Menu";
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 
 class App extends React.Component {
     state = {
