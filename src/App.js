@@ -9,6 +9,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import config from './config';
 import jQuery from "jquery";
+import Menu from "./components//Menu";
 const apiPrefix = config.apiPrefix;
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -66,23 +67,33 @@ class App extends React.Component {
         if (this.state.user_id === 'guest')
             loginBtn = <a href="/auth">Войти</a>
         else
-            loginBtn = <span>Привет {this.getUserName()} <a href="/#" onClick={this.logout}>Выйти</a></span>
+            loginBtn = <span>Привет, {this.getUserName()}! <a href="/#" onClick={this.logout}>Выйти</a></span>
         return (
             <div className="App">
                 <header className="App-header">
-                    <h1>
-                        Office map.
-                        {loginBtn}
-                        {/*{userItems}*/}
-                    </h1>
+                <div className="flex">
+                     <div>
+                         <h1>
+                             Office map
+                         </h1>
+                     </div>
+                     <div className="login">
+                         <p>
+                             {loginBtn}
+                             {/*{userItems}*/}
+                         </p>
+                     </div>
+                     
+                     </div>
                 </header>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={MainPage} />
+                        
                         <Route exact path="/reg" component={RegPage} />
                         <Route exact path="/auth" component={AuthPage} />
-                        <Route exact path="/listusers" component={ListUser} />
+                        <Route path="/" component={MainPage} />
                         <Route component={NotFoundPage} />
+                        
                     </Switch>
                 </Router>
             </div>

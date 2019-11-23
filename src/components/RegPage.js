@@ -1,5 +1,5 @@
 import React from 'react';
-import RegForm from '../User/RegForm';
+import RegForm from './User/RegForm';
 
 export default function RegPage() {
     return(

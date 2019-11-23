@@ -2,6 +2,8 @@ import React from 'react';
 import View3 from "./View3";
 import Menu from "./Menu";
 import axios from 'axios';
+import ListUser from "./ListUsers";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
     state = {
@@ -23,7 +25,13 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Menu/>
-                <View3/>
+            <Router>
+            <Switch>
+                <Route exact path="/map" component={View3} />
+                <Route exact path="/listusers" component={ListUser} />
+            </Switch>
+        </Router>
+            
             </div>
 
         );

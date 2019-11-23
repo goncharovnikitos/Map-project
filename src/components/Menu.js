@@ -7,7 +7,7 @@ export default function Menu() {
         <ul>
             <li><a href="/listusers" className="">Список пользователей</a></li>
             <li><a>Плитка</a></li>
-            <li><a>Карта</a></li>
+            <li><a href="/map" className="">Карта</a></li>
         </ul>
         </div>
     )

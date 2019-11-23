@@ -25,15 +25,7 @@ app.use(session({
 }));
 
 // разрешаем использование запросов к этому серверу с любых адресов
-app.use(cors({ origin: '*' }));
-
-// разрешаем использование запросов к этому серверу с любых адресов и для любых запросов
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // любой адрес
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"); // любой тип запроса
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); // любой заголовок
-    next();
-});
+app.use(cors());
 
 app.get('/users', (req, res) => {
     db.listUsers().then(data => res.send(data));

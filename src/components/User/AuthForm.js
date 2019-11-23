@@ -1,6 +1,6 @@
 import React from 'react';
 import jQuery from 'jquery';
-import config from './../config';
+import config from '../../config';
 const apiPrefix = config.apiPrefix;
 
 export default class AuthForm extends React.Component {
