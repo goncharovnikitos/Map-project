@@ -2,24 +2,26 @@ import React from 'react';
 import jQuery from 'jquery';
 import config from '../../config';
 import axios from 'axios';
+
 const apiPrefix = config.apiPrefix;
 
 export default class List extends React.Component {
-    state={
+    state = {
         users: []
-    }
-    async componentDidMount(){
+    };
+
+    async componentDidMount() {
         let response = await axios.get(apiPrefix + '/users');
 
-    this.setState({users: response.data})}
-    
+        this.setState({users: response.data})
+    }
 
-    
-    render(){
+    render() {
+        if (!this.state.users) return null;
         return (
-            <div className="peopleList">
-                {this.state.users.map(u=><li>{u.lastName} {u.firstName} {u.middleName}</li>)}
-            </div>
+            <ul>
+                {this.state.users.map(u => <li>{u.lastName} {u.firstName} {u.middleName}</li>)}
+            </ul>
         );
     }
 }

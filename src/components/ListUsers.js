@@ -1,13 +1,9 @@
 import React from 'react';
-import List  from "./User/List";
-import Menu from "./Menu";
-
-
+import List from "./User/List";
 
 export default function NotFoundPage() {
-    return(
-        <div className="">
-            
+    return (
+        <div className="peopleList">
             <List/>
         </div>
     )
