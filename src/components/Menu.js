@@ -6,7 +6,6 @@ export default function Menu() {
         <div className="Menu">
         <ul>
             <li><a href="/listusers" className="">Список пользователей</a></li>
-            <li><a>Плитка</a></li>
             <li><a href="/map" className="">Карта</a></li>
         </ul>
         </div>

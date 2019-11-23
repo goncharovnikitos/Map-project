@@ -42,3 +42,12 @@ code {
   box-shadow:0 0 10px white;
   background-color: red;
 }
+
+.peopleList li{
+  list-style-type: none;
+  padding-bottom: 20px;
+}
+
+.card {
+  padding-bottom: 20px
+}

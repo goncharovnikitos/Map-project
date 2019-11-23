@@ -17,7 +17,7 @@ export default class List extends React.Component {
     
     render(){
         return (
-            <div>
+            <div className="peopleList">
                 {this.state.users.map(u=><li>{u.lastName} {u.firstName} {u.middleName}</li>)}
             </div>
         );
