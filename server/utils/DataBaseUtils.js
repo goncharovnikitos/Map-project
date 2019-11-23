@@ -21,12 +21,15 @@ export function findUserID(id) {
 export function findUserByName(name){
     return User.find({lastName: name});
 }
+export function findUserByLogin(login){
+    return User.findOne({login: login});
+}
 export function loginUser(login, password){
     return User.findOne({$and: [{login: login}, {password: password}]});
 }
 
-export function validateUser(data) {
-    const user = new User({
+function formatUser(data) {
+    return {
         login: data.login,
         password: data.password,
         lastName: data.lastName,
@@ -36,7 +39,11 @@ export function validateUser(data) {
         photo: data.photo,
         isAdmin: data.isAdmin,
         createdAt: new Date()
-    });
+    };
+}
+
+export function validateUser(data) {
+    const user = new User(formatUser(data));
     let validator = user.validateSync();
     if (typeof validator === 'object' && validator.errors) {
         let error_messages = [];
@@ -52,18 +59,7 @@ export function validateUser(data) {
 }
 
 export function createUser(data) {
-    const user = new User({
-        login: data.login,
-        password: data.password,
-        lastName: data.lastName,
-        firstName: data.firstName,
-        middleName: data.middleName,
-        email: data.email,
-        photo: data.photo,
-        isAdmin: data.isAdmin,
-        createdAt: new Date()
-    });
-    return user.save();
+    return User.replaceOne({login: data.login}, formatUser(data), { upsert: true });
 }
 
 export function deleteUser(id) {

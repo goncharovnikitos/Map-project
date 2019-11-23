@@ -59,10 +59,13 @@ app.post('/new-user/', (req, res) => {
         res.send(validate);
         return;
     }
-    db.createUser(req.body).then(function(data) {
-        let user_id = (data && data._id) ? data._id : null;
-        session.user_id = user_id;
-        res.send(user_id ? 'ok' : 'error');
+    const body_data = req.body;
+    db.createUser(body_data).then(function(data) {
+        db.findUserByLogin(body_data.login).then(function(data) {
+            let user_id = (data && data._id) ? data._id : null;
+            session.user_id = user_id;
+            res.send(user_id ? 'ok' : 'error');
+        });
     });
 });
 
@@ -73,7 +76,7 @@ app.get('/logout', (req, res) => {
 
 app.post('/login', (req, res) => {
     db.loginUser(req.body.login, req.body.password).then(function(data) {
-        console.log(data);
+        // console.log(data);
         let user_id = (data && data._id) ? data._id : null;
         session.user_id = user_id;
         res.send(user_id ? 'ok' : 'Пользователь не найден');

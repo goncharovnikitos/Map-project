@@ -99,7 +99,9 @@ class App extends React.Component {
     getUserName() {
         let userData = this.state.user_data;
         if (this.state.user_id === 'guest' || !userData || !userData._id) return '';
-        return userData.firstName + ' ' + userData.middleName + ' ' + userData.lastName;
+        let s = userData.firstName + ' ' + userData.middleName + ' ' + userData.lastName;
+        if (s === '  ') s = userData.login;
+        return s;
     }
 
 
