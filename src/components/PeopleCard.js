@@ -24,21 +24,29 @@ let users = [
         "email": "lena@mail.ru"
     },
 ];
+
 export default function PeopleCard(props) {
     let placeId = props.placeId;
     let user = placeId ? users[placeId - 1] : null;
-    if (!placeId || !user) return (
+   
+    if (!placeId) return (
+        <div className="card">
+            Выберите место
+        </div>
+    );
+    if (!user) return (
         <div className="card">
             Место свободно
         </div>
     );
+
     return (
         <div className="card">
             <ul>
-                <li><img src={user.picture} alt='Фото сотрудника' height={100}/></li>
-                <li>{user.lastName} {user.firstName} {user.middleName} {}</li>
-                <li>Email - {user.email}</li>
-            </ul>
-        </div>
-    )
+               <li><img src={user.picture} alt='Фото сотрудника' height={100}/></li>
+               <li>{user.lastName} {user.firstName} {user.middleName} {}</li>
+               <li>Email - {user.email}</li>
+           </ul>
+       </div>
+   )
 }

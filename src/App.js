@@ -4,6 +4,7 @@ import MainPage from "./components/MainPage";
 import RegPage from "./components/RegPage";
 import AuthPage from "./components/AuthPage";
 import NotFoundPage from "./components/NotFoundPage";
+import ListUser from "./components/ListUsers";
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import config from './config';
@@ -69,17 +70,18 @@ class App extends React.Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    <p>
+                    <h1>
                         Office map.
                         {loginBtn}
                         {/*{userItems}*/}
-                    </p>
+                    </h1>
                 </header>
                 <Router>
                     <Switch>
                         <Route exact path="/" component={MainPage} />
                         <Route exact path="/reg" component={RegPage} />
                         <Route exact path="/auth" component={AuthPage} />
+                        <Route exact path="/listusers" component={ListUser} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </Router>
