@@ -1,50 +1,40 @@
 import React from 'react';
 
 import parse from 'html-react-parser';
+import map from './map.svg'
 
 export default
-function Map(props) {
-    let func = props.onPlace;
+class Map extends React.Component {
 
-    return (
-    <div className="map">
-        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-            <g>
-                <rect x="0" y="0" width="200" height="200" fill="blue" strokeWidth="4"/>
-                <circle cx="15" cy="15" r="10" fill="white" data-placeid = "1" onClick={func} />
-                <circle cx="40" cy="15" r="10" fill="white" data-placeid = "2" onClick={func}/>
-                <circle cx="65" cy="15" r="10" fill="white" data-placeid = "3" onClick={func}/>
-                <circle cx="90" cy="15" r="10" fill="white" data-placeid = "4" onClick={func}/>
-                <circle cx="115" cy="15" r="10" fill="white" data-placeid = "5" onClick={func}/>
-            </g>
-        </svg>
-    </div>
-    )
+    //<img src={map} onClick={e=>console.log(e.nativeEvent)}/>
+    async componentDidMount() {
+        let m = await fetch(map);
+        let text = await m.text();
+        console.log(text);
+        this.setState({text:text});
 
+    }
 
+    state = {
+      text: ''
+    };
 
-    let svg = '<div className="map">\n' +
-        '            <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">\n' +
-        '                    <rect x="0" y="0" width="200" height="200" fill="blue" stroke-width="4"/>\n' +
-        '                    <circle cx="15" cy="15" r="10" fill="white" data-placeid = "1" />\n' +
-        '                <circle cx="40" cy="15" r="10" fill="white" data-placeid = "2" />\n' +
-        '                <circle cx="65" cy="15" r="10" fill="white" data-placeid = "3" />\n' +
-        '                <circle cx="90" cy="15" r="10" fill="white" data-placeid = "4" />\n' +
-        '                <circle cx="115" cy="15" r="10" fill="white" data-placeid = "5" />' +
-        '                </g>\n' +
-        '            </svg>\n' +
-        '        </div>';
-    return parse(svg,
-        {
-            replace: function (domNode){
-                console.log(domNode.attribs);
-                if (domNode.attribs && domNode.attribs['data-placeid']) {
-                    domNode.attribs = domNode.attribs || {};
-                    domNode.attribs['onClick'] = func;
-                    return React.createElement(domNode.name, domNode.attribs, domNode.children);
-                }
-            }
-        });
+    render() {
+        if (!this.state.text) return null;
+        return (
+            <div className="map">{parse(this.state.text,
+                {
+                    replace: (domNode) => {
+                        if (domNode.attribs && domNode.attribs['data-placeid']) {
+                            domNode.attribs = domNode.attribs || {};
+                            domNode.attribs['onClick'] = this.props.onPlace;
+                            if (domNode.attribs['data-placeid'] === this.props.placeId)
+                                domNode.attribs['fill'] = 'red';
+                            return React.createElement(domNode.name, domNode.attribs, domNode.children);
+                        }
+                    }
+                })}
+            </div>
+        )
+    }
 }
-
-
