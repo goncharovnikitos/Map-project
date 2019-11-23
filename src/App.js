@@ -22,6 +22,7 @@ class App extends React.Component {
             placeId: null,
             users: [],
             user_id: 'guest',
+            user_data: {}
         };
         this.init = () => {
             let _this = this;
@@ -29,22 +30,17 @@ class App extends React.Component {
                 _this.setState({
                     user_id: res
                 });
+                if (res!=='guest'){
+                    jQuery.get(apiPrefix + '/find-user/' + res, function(res){
+                        console.log(res);
+                        _this.setState({
+                            user_data: res
+                        });
+                        // _this.state.user_id = res; // user._id OR 'guest'
+                    });
+                }
                 // _this.state.user_id = res; // user._id OR 'guest'
             });
-            axios.get(apiPrefix + '/get-login')
-            // .then(resp => resp.json())
-                .then( (response) => {//когда ответ получим - можем вызвать функцию
-                    // console.info(response);
-                    this.setState({
-                        users: response.data
-                    });
-                })
-                .catch( (error) => {
-                    console.error(error);
-                });
-            // if (!this.state.users.length){
-            // this.getAll();
-            // }
         };
         this.getAll = () => {
             axios.get(apiPrefix + '/users')
@@ -74,7 +70,7 @@ class App extends React.Component {
         if (this.state.user_id === 'guest')
             loginBtn = <a href="/auth">Войти</a>
         else
-            loginBtn = <span>Привет {this.state.user_id} <a href="/logout">Выйти</a></span>
+            loginBtn = <span>Привет {this.getUserName()} <a href="/logout">Выйти</a></span>
         return (
             <div className="App">
                 <header className="App-header">
@@ -98,6 +94,12 @@ class App extends React.Component {
             </div>
 
         );
+    }
+
+    getUserName() {
+        let userData = this.state.user_data;
+        if (this.state.user_id === 'guest' || !userData || !userData._id) return '';
+        return userData.firstName + ' ' + userData.middleName + ' ' + userData.lastName;
     }
 
 
